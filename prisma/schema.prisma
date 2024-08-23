@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model leads {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  age           DateTime @db.Date
+  complete_name String
+}
+
+model patient {
+  id                     String   @id @default(auto()) @map("_id") @db.ObjectId
+  anamnesis_link         String
+  complete_name          String
+  date_of_birth          DateTime @db.Date
+  installments_paid      Int
+  is_paying              Boolean
+  num_sessions_done      Int
+  num_sessions_purchased Int
+  number_of_installments Int
+  remaining_value        Float
+  status                 String
+  total_value            Float
+}
