@@ -1,3 +1,4 @@
+import { Dashboard } from "@/components/dashboard";
 import LeadsList from "@/components/leads-list";
 import { Suspense } from "react";
 
@@ -7,6 +8,7 @@ export default function Home() {
       <Suspense fallback={<div>Loading...</div>}>
         <LeadsList />
       </Suspense>
+      <Dashboard />
     </main>
   );
 }
