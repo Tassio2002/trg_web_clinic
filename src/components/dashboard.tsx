@@ -1,6 +1,12 @@
 import Link from "../../node_modules/next/link";
 
-
+import { RxDashboard } from "react-icons/rx";
+import { TbPigMoney } from "react-icons/tb";
+import { GoPeople } from "react-icons/go";
+import { BsSearch } from "react-icons/bs";
+import { IoPersonOutline } from "react-icons/io5";
+import { GoArrowUpRight } from "react-icons/go";
+import { CiBookmarkPlus, CiBookmarkCheck } from "react-icons/ci";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -39,7 +45,7 @@ export function Dashboard() {
             href="#"
             className="flex items-center gap-2 text-lg font-semibold md:text-base"
           >
-            <div className="h-6 w-6" />
+            <RxDashboard className="text-2xl"/>
             <span className="sr-only">Acme Inc</span>
           </Link>
           <Link
@@ -52,25 +58,25 @@ export function Dashboard() {
             href="#"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Orders
+            Compras
           </Link>
           <Link
             href="#"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Products
+            Produtos
           </Link>
           <Link
             href="#"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Customers
+            Clientes
           </Link>
           <Link
             href="#"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Analytics
+            Dados
           </Link>
         </nav>
         <Sheet>
@@ -80,7 +86,7 @@ export function Dashboard() {
               size="icon"
               className="shrink-0 md:hidden"
             >
-              <div className="h-5 w-5" />
+              <RxDashboard className="text-3xl" />
               <span className="sr-only">Toggle navigation menu</span>
             </Button>
           </SheetTrigger>
@@ -90,7 +96,7 @@ export function Dashboard() {
                 href="#"
                 className="flex items-center gap-2 text-lg font-semibold"
               >
-                <div className="h-6 w-6" />
+                <RxDashboard />
                 <span className="sr-only">Acme Inc</span>
               </Link>
               <Link href="#" className="hover:text-foreground">
@@ -100,25 +106,25 @@ export function Dashboard() {
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
               >
-                Orders
+                Compras
               </Link>
               <Link
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
               >
-                Products
+                Produtos
               </Link>
               <Link
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
               >
-                Customers
+                Clientes
               </Link>
               <Link
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
               >
-                Analytics
+                Dados
               </Link>
             </nav>
           </SheetContent>
@@ -126,10 +132,10 @@ export function Dashboard() {
         <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
           <form className="ml-auto flex-1 sm:flex-initial">
             <div className="relative">
-              <div className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+              <BsSearch className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground"/>
               <Input
                 type="search"
-                placeholder="Search products..."
+                placeholder="Procurar informações..."
                 className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
               />
             </div>
@@ -137,7 +143,7 @@ export function Dashboard() {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
-                <div className="h-5 w-5" />
+                <IoPersonOutline className="text-xl" />
                 <span className="sr-only">Toggle user menu</span>
               </Button>
             </DropdownMenuTrigger>
@@ -157,12 +163,12 @@ export function Dashboard() {
           <Card x-chunk="dashboard-01-chunk-0">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Total Revenue
+                Valor a receber no mês
               </CardTitle>
-              <div className="h-4 w-4 text-muted-foreground" />
+              <TbPigMoney className="text-2xl stroke-[1px]"/>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$45,231.89</div>
+              <div className="text-2xl font-bold">R$45,231.89</div>
               <p className="text-xs text-muted-foreground">
                 +20.1% from last month
               </p>
@@ -171,9 +177,9 @@ export function Dashboard() {
           <Card x-chunk="dashboard-01-chunk-1">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">
-                Subscriptions
+                Total de clientes
               </CardTitle>
-              <div className="h-4 w-4 text-muted-foreground" />
+              <GoPeople className="text-xl" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">+2350</div>
@@ -184,8 +190,8 @@ export function Dashboard() {
           </Card>
           <Card x-chunk="dashboard-01-chunk-2">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Sales</CardTitle>
-              <div className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">Sessões experimentais</CardTitle>
+              <CiBookmarkPlus className="text-xl" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">+12,234</div>
@@ -196,8 +202,8 @@ export function Dashboard() {
           </Card>
           <Card x-chunk="dashboard-01-chunk-3">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Now</CardTitle>
-              <div className="h-4 w-4 text-muted-foreground" />
+              <CardTitle className="text-sm font-medium">Sessões de terapia</CardTitle>
+              <CiBookmarkCheck className="text-xl" />
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">+573</div>
@@ -211,15 +217,15 @@ export function Dashboard() {
           <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
-                <CardTitle>Transactions</CardTitle>
+                <CardTitle>Transações</CardTitle>
                 <CardDescription>
-                  Recent transactions from your store.
+                  Transações recentes da sua loja
                 </CardDescription>
               </div>
               <Button asChild size="sm" className="ml-auto gap-1">
                 <Link href="#">
-                  View All
-                  <div className="h-4 w-4" />
+                  Ver todos
+                  <GoArrowUpRight className="text-xl" />
                 </Link>
               </Button>
             </CardHeader>
@@ -227,7 +233,7 @@ export function Dashboard() {
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Customer</TableHead>
+                    <TableHead>Cliente</TableHead>
                     <TableHead className="hidden xl:table-column">
                       Type
                     </TableHead>
@@ -237,7 +243,7 @@ export function Dashboard() {
                     <TableHead className="hidden xl:table-column">
                       Date
                     </TableHead>
-                    <TableHead className="text-right">Amount</TableHead>
+                    <TableHead className="text-right">Valor</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -259,7 +265,7 @@ export function Dashboard() {
                     <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
                       2023-06-23
                     </TableCell>
-                    <TableCell className="text-right">$250.00</TableCell>
+                    <TableCell className="text-right">R$250.00</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>
@@ -279,7 +285,7 @@ export function Dashboard() {
                     <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
                       2023-06-24
                     </TableCell>
-                    <TableCell className="text-right">$150.00</TableCell>
+                    <TableCell className="text-right">R$150.00</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>
@@ -299,7 +305,7 @@ export function Dashboard() {
                     <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
                       2023-06-25
                     </TableCell>
-                    <TableCell className="text-right">$350.00</TableCell>
+                    <TableCell className="text-right">R$350.00</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>
@@ -319,7 +325,7 @@ export function Dashboard() {
                     <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
                       2023-06-26
                     </TableCell>
-                    <TableCell className="text-right">$450.00</TableCell>
+                    <TableCell className="text-right">R$450.00</TableCell>
                   </TableRow>
                   <TableRow>
                     <TableCell>
@@ -339,7 +345,7 @@ export function Dashboard() {
                     <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
                       2023-06-27
                     </TableCell>
-                    <TableCell className="text-right">$550.00</TableCell>
+                    <TableCell className="text-right">R$550.00</TableCell>
                   </TableRow>
                 </TableBody>
               </Table>
@@ -347,7 +353,7 @@ export function Dashboard() {
           </Card>
           <Card x-chunk="dashboard-01-chunk-5">
             <CardHeader>
-              <CardTitle>Recent Sales</CardTitle>
+              <CardTitle>Últimos pagamentos</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-8">
               <div className="flex items-center gap-4">
@@ -363,7 +369,7 @@ export function Dashboard() {
                     olivia.martin@email.com
                   </p>
                 </div>
-                <div className="ml-auto font-medium">+$1,999.00</div>
+                <div className="ml-auto font-medium">+R$1,999.00</div>
               </div>
               <div className="flex items-center gap-4">
                 <Avatar className="hidden h-9 w-9 sm:flex">
@@ -378,7 +384,7 @@ export function Dashboard() {
                     jackson.lee@email.com
                   </p>
                 </div>
-                <div className="ml-auto font-medium">+$39.00</div>
+                <div className="ml-auto font-medium">+R$39.00</div>
               </div>
               <div className="flex items-center gap-4">
                 <Avatar className="hidden h-9 w-9 sm:flex">
@@ -393,7 +399,7 @@ export function Dashboard() {
                     isabella.nguyen@email.com
                   </p>
                 </div>
-                <div className="ml-auto font-medium">+$299.00</div>
+                <div className="ml-auto font-medium">+R$299.00</div>
               </div>
               <div className="flex items-center gap-4">
                 <Avatar className="hidden h-9 w-9 sm:flex">
@@ -408,7 +414,7 @@ export function Dashboard() {
                     will@email.com
                   </p>
                 </div>
-                <div className="ml-auto font-medium">+$99.00</div>
+                <div className="ml-auto font-medium">+R$99.00</div>
               </div>
               <div className="flex items-center gap-4">
                 <Avatar className="hidden h-9 w-9 sm:flex">
@@ -423,7 +429,7 @@ export function Dashboard() {
                     sofia.davis@email.com
                   </p>
                 </div>
-                <div className="ml-auto font-medium">+$39.00</div>
+                <div className="ml-auto font-medium">+R$39.00</div>
               </div>
             </CardContent>
           </Card>

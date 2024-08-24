@@ -13,7 +13,6 @@ import {
 
   export default async function LeadsList() {
     const leads = await db.leads.findMany();
-    console.log(leads);
     
     return (
       <Table>
