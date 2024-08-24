@@ -35,6 +35,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { ModeToggle } from "./dark-mode-toggle";
 
 export function Dashboard() {
   return (
@@ -58,7 +59,7 @@ export function Dashboard() {
             href="#"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Compras
+            Vendas
           </Link>
           <Link
             href="#"
@@ -106,7 +107,7 @@ export function Dashboard() {
                 href="#"
                 className="text-muted-foreground hover:text-foreground"
               >
-                Compras
+                Vendas
               </Link>
               <Link
                 href="#"
@@ -156,6 +157,7 @@ export function Dashboard() {
               <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          <ModeToggle />
         </div>
       </header>
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
@@ -353,7 +355,7 @@ export function Dashboard() {
           </Card>
           <Card x-chunk="dashboard-01-chunk-5">
             <CardHeader>
-              <CardTitle>Últimos pagamentos</CardTitle>
+              <CardTitle>Pagamentos recentes</CardTitle>
             </CardHeader>
             <CardContent className="grid gap-8">
               <div className="flex items-center gap-4">
