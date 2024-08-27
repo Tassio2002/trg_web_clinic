@@ -21,8 +21,40 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { TCustomer } from "@/app/types";
+import { FormatCurrency } from "../../utils/formatCurrency";
 
-export function Dashboard() {
+const getCustomers = async (): Promise<TCustomer[] | null> => {
+  try {
+    const res = await fetch(`${process.env.BASE_URL}/api/customers`);
+
+    if (res.ok) {
+      const customers = res.json();
+
+      return customers;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+};
+
+export async function Dashboard() {
+  const customers = await getCustomers();
+
+  const installmentPerCustommer: number[] | undefined = customers?.map(
+    (customer) => {
+      return customer.total_value / customer.number_of_installments;
+    }
+  );
+
+  const totalValueMounth =
+    installmentPerCustommer?.reduce(
+      (acc, installment) => acc + installment,
+      0
+    ) ?? 0;
+  const totalValueMounthFormated = FormatCurrency(totalValueMounth);
+  const customersQuantity = customers?.length;
   return (
     <div className="flex min-h-screen w-full flex-col">
       <main className="flex flex-1 flex-col gap-4 p-4 md:gap-8 md:p-8">
@@ -32,10 +64,12 @@ export function Dashboard() {
               <CardTitle className="text-sm font-medium">
                 Valor a receber no mês
               </CardTitle>
-              <TbPigMoney className="text-2xl stroke-[1px]"/>
+              <TbPigMoney className="text-2xl stroke-[1px]" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">R$45,231.89</div>
+              <div className="text-2xl font-bold">
+                {totalValueMounthFormated}
+              </div>
               <p className="text-xs text-muted-foreground">
                 +20.1% from last month
               </p>
@@ -49,7 +83,7 @@ export function Dashboard() {
               <GoPeople className="text-xl" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">+2350</div>
+              <div className="text-2xl font-bold">{customersQuantity}</div>
               <p className="text-xs text-muted-foreground">
                 +180.1% from last month
               </p>
@@ -57,7 +91,9 @@ export function Dashboard() {
           </Card>
           <Card x-chunk="dashboard-01-chunk-2">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Sessões experimentais</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                Sessões experimentais
+              </CardTitle>
               <CiBookmarkPlus className="text-xl" />
             </CardHeader>
             <CardContent>
@@ -69,7 +105,9 @@ export function Dashboard() {
           </Card>
           <Card x-chunk="dashboard-01-chunk-3">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Sessões de terapia</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                Sessões de terapia
+              </CardTitle>
               <CiBookmarkCheck className="text-xl" />
             </CardHeader>
             <CardContent>
@@ -84,13 +122,11 @@ export function Dashboard() {
           <Card className="xl:col-span-2" x-chunk="dashboard-01-chunk-4">
             <CardHeader className="flex flex-row items-center">
               <div className="grid gap-2">
-                <CardTitle>Transações</CardTitle>
-                <CardDescription>
-                  Transações recentes da sua loja
-                </CardDescription>
+                <CardTitle>Clientes</CardTitle>
+                <CardDescription>Clientes cadastrados</CardDescription>
               </div>
               <Button asChild size="sm" className="ml-auto gap-1">
-                <Link href="#">
+                <Link href="/costumers">
                   Ver todos
                   <GoArrowUpRight className="text-xl" />
                 </Link>
@@ -101,119 +137,25 @@ export function Dashboard() {
                 <TableHeader>
                   <TableRow>
                     <TableHead>Cliente</TableHead>
-                    <TableHead className="hidden xl:table-column">
-                      Type
-                    </TableHead>
-                    <TableHead className="hidden xl:table-column">
-                      Status
-                    </TableHead>
-                    <TableHead className="hidden xl:table-column">
-                      Date
-                    </TableHead>
-                    <TableHead className="text-right">Valor</TableHead>
+                    <TableHead className="text-right">Sessões</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Liam Johnson</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        liam@example.com
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      Sale
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      <Badge className="text-xs" variant="outline">
-                        Approved
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                      2023-06-23
-                    </TableCell>
-                    <TableCell className="text-right">R$250.00</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Olivia Smith</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        olivia@example.com
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      Refund
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      <Badge className="text-xs" variant="outline">
-                        Declined
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                      2023-06-24
-                    </TableCell>
-                    <TableCell className="text-right">R$150.00</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Noah Williams</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        noah@example.com
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      Subscription
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      <Badge className="text-xs" variant="outline">
-                        Approved
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                      2023-06-25
-                    </TableCell>
-                    <TableCell className="text-right">R$350.00</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Emma Brown</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        emma@example.com
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      Sale
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      <Badge className="text-xs" variant="outline">
-                        Approved
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                      2023-06-26
-                    </TableCell>
-                    <TableCell className="text-right">R$450.00</TableCell>
-                  </TableRow>
-                  <TableRow>
-                    <TableCell>
-                      <div className="font-medium">Liam Johnson</div>
-                      <div className="hidden text-sm text-muted-foreground md:inline">
-                        liam@example.com
-                      </div>
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      Sale
-                    </TableCell>
-                    <TableCell className="hidden xl:table-column">
-                      <Badge className="text-xs" variant="outline">
-                        Approved
-                      </Badge>
-                    </TableCell>
-                    <TableCell className="hidden md:table-cell lg:hidden xl:table-column">
-                      2023-06-27
-                    </TableCell>
-                    <TableCell className="text-right">R$550.00</TableCell>
-                  </TableRow>
+                  {customers?.map((customer, idx) => {
+                    return (
+                      <TableRow key={idx}>
+                        <TableCell>
+                          <div className="font-medium">
+                            {customer.complete_name}
+                          </div>
+                          <div className="hidden text-sm text-muted-foreground md:inline">
+                            {customer.status}
+                          </div>
+                        </TableCell>
+                        <TableCell className="text-right">{`${customer.num_sessions_done}/${customer.num_sessions_purchased}`}</TableCell>
+                      </TableRow>
+                    );
+                  })}
                 </TableBody>
               </Table>
             </CardContent>
