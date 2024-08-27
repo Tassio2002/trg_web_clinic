@@ -13,7 +13,7 @@ model Lead {
   complete_name String
 }
 
-model Custommer {
+model Customer {
   id                     String    @id @default(auto()) @map("_id") @db.ObjectId
   anamnesis_link         String
   complete_name          String
@@ -26,14 +26,15 @@ model Custommer {
   remaining_value        Float
   status                 String
   total_value            Float
+  monthly_payment_date   Int
   payments               Payment[]
 }
 
 model Payment {
-  id               String     @id @default(auto()) @map("_id") @db.ObjectId
-  date_of_payment  DateTime   @db.Date
+  id               String    @id @default(auto()) @map("_id") @db.ObjectId
+  date_of_payment  DateTime  @db.Date
   payment_method   String
   value_of_payment String
-  custommer        Custommer? @relation(fields: [custommerId], references: [id])
-  custommerId      String?    @db.ObjectId
+  customer         Customer? @relation(fields: [customerId], references: [id])
+  customerId       String?   @db.ObjectId
 }

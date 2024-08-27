@@ -1,10 +1,9 @@
-import { PatientData } from "@/app/types";
 import db from "@/db";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const customers = await db.custommer.findMany();
+    const customers = await db.customer.findMany();
     return NextResponse.json(customers);
   } catch (error) {
     console.log(error);
@@ -25,10 +24,11 @@ export async function POST(req: Request) {
     remaining_value,
     status,
     total_value,
+    monthly_payment_date,
   } = await req.json();
 
   try {
-    const newCustummer = await db.custommer.create({
+    const newCustummer = await db.customer.create({
       data: {
         anamnesis_link,
         complete_name,
@@ -41,11 +41,12 @@ export async function POST(req: Request) {
         remaining_value,
         status,
         total_value,
+        monthly_payment_date,
       },
     });
     console.log("Customer added");
     return NextResponse.json(newCustummer, { status: 201 });
   } catch (error) {
-    return NextResponse.json({ message: error});
+    return NextResponse.json({ message: error });
   }
 }
