@@ -5,6 +5,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between">
       <Suspense fallback={<div>Loading...</div>}>
+        {/* @ts-expect-error Server Component */}
         <Dashboard />
       </Suspense>
     </main>
